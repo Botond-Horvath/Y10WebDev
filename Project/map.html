@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test</title>
+        <link rel="icon" href="Hungary.png"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            /*Importing fonts that I will use (especially on the map)*/
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Charm:wght@700&family=Montserrat:wght@500&family=Redressed&display=swap');
+            /*body styling (basic)*/
+            body {
+                background-color:aliceblue;
+                margin:0;
+                padding:0;
+                font-family:'Montserrat', sans-serif;
+            }
+
+            h1 {
+                background-image:url(background.jpg); /*background image behind header*/
+                margin:0;
+                padding-top:150px;
+                padding-bottom:150px;
+                background-size:1450px 400px; /*Sizing of the background image*/
+                font-size:50px;
+                text-align:center;
+            }
+
+            /*Styling for the navigation bar (unordered list):*/
+            ul.nav {
+                list-style-type: none; /*No bullet points*/
+                background-color:#C4C4C4;
+			    margin:0;
+			    width:100%; /*Spans the whole page*/
+			    padding:0;
+                overflow:hidden;
+            }
+            /*Different styling for the current page*/
+            .current {
+                background-color:#8B4F23;
+                color:white;
+            }
+            /*All sections are floated to the right*/
+            ul.nav > li {
+                float:left;
+            }
+            ul.nav > li a {
+                text-align:center;
+			    color:black;
+			    padding:10px;
+			    font-size:20px;
+			    text-decoration:none;
+                border:none;
+                display:inline-block;
+            }
+            /*If the user hovers over one of the links:*/
+            ul.nav > li a:hover {
+                background-color:#8B4F23;
+                color:black;
+                cursor:pointer;
+                transition:0.2s;
+            }
+
+            /*Basic margins set for anything under a text class:*/
+            .text {
+                margin:30px;
+            }
+
+            /*Styling for the map size:*/
+            #map {
+                width:100%;
+                height:730px;
+            }
+            /*Styling for the marker headings inside map (class given in JS):*/
+            .heading {
+                font-family:'Charm', cursive;
+                font-size:20px;
+            }
+
+            /*Sticky property, also manipulated through JS to make the sticky navbar:*/
+            .sticky {
+                top:0;
+                position:sticky;
+            }
+        </style>
+        <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
+    </head>
+    <body>
+        <!--Header tag for the title of this sub-umbrella section on Historical Sites-->
+        <h1>Main Historical Sites of Hungary</h1>
+
+        <!--HTML unordered list for the navigation bar at the top-->
+        <ul class="nav" id="navId">
+            <li><a href="#top">Welcome</a></li>
+            <li><a class='current' href="#top">Historical sites</a></li>
+            <li><a class="dropdown_button" href="#top">Nature</a></li>
+            <li><a href="#top">Cities</a></li>
+        </ul>
+
+        <!--Div container for all the normal text that will be on the site-->
+        <div class="text">
+            <p>
+                Welcome to the historical sites section! This section explores some of
+                the most valuable and historically significant historical sites
+                throughout Hungary. This section on mostly medieval architechture
+                including ancient, romanesque, and gothic elements. However, there
+                are in fact some renaissance and baroque sites too. The sites included
+                here comprise of castles, churches, chapels, and palaces. Feel free
+                to explore, and use the plus/minus bar to zoom and shrink the map!
+            </p>
+        </div>
+
+        <!--Div container for the interactive map (note: the id will be used in JS)-->
+        <div id='map'></div>
+
+        <!--Link to the database for the sites-->
+        <script type="text/javascript" src="data.js"></script>
+        <script type="text/javascript">
+            //Building arrays for each site with their parameters inside a larger array
+            //of all the sites:
+            array = [];
+            for (i=0;i<data.length;i++) {
+                array.push([data[i].coords,data[i].name,data[i].desc,data[i].link]);
+            };
+
+            //Once the window loads, the map is created through the API
+            window.onload = function() {
+                L.mapquest.key = 'L5RTcPpQfUZ49GiMZfCAwjwtitkE1voq'; //API key
+                //Under the div with id "map", it sets the basic parameters:
+                map = L.mapquest.map('map', {
+                    center: [47.050921, 19.307706], //Center of Hungary
+                    layers: L.mapquest.tileLayer('map'),
+                    zoom: 7, //Good zoom
+                    scrollWheelZoom:false, //No scroll zoom (that would disturb actual scrolling)
+                });
+
+                //Function for adding the markers to the map, one by one:
+                function addMarker(location) {
+                    description = location[1].concat(location[2],location[3]) //Name, description, link from data
+                    //At the coords of the location, it adds a marker with pop up text for the decription
+                    //of that location (concatenated):
+                    L.marker(location[0], {
+                        icon: L.mapquest.icons.marker(),
+                        draggable: false
+                    }).bindPopup(description).addTo(map);
+                }
+                //Calls the above function for each array item (location):
+                for (i=0;i<array.length;i++) {
+                    addMarker(array[i]);
+                };
+            }
+        </script>
+        <!--Separate code for the sticky navigation bar manipulation:-->
+        <script type="text/javascript">
+            window.onscroll = function() {glue()};
+
+            nav = document.getElementById("navId");
+            sticky = nav.offsetTop;
+
+            function glue() {
+                if (window.pageYOffset > sticky) {
+                    nav.classList.add("sticky");
+                } else {
+                    nav.classList.remove("sticky");
+                }
+            }
+        </script>
+    </body>
+</html>

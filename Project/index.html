@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Veszprem</title>
+        <style>
+            h1 {
+            font-family:Verdana;
+            text-align:center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>This is the weather in Veszprem</h1>
+        <img src="" id="icon"/>
+        <div id="temp"></div>
+        <div id="cond"></div>
+
+        <script src="coords.js"></script>
+        <script>
+            lat = d.veszprem.lat;
+            long = d.veszprem.long;
+            lang = 'en';
+            key = 'a5d0c623c2fb4eb7a9e133556221404';
+            url = `https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${lat},${long}&days=3&lang=${lang}&alerts=yes`;
+
+            function getData() {
+                return fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error (response.statusText);
+                        alert('Weather data is unavailable at the moment for ' + location);
+                    }
+                    data = response.json();
+                    return data;
+                })
+                .catch(err => console.log('Request Failed', err));
+            }
+            getData().then(r => {
+                console.log(r);
+                temp = r.current.temp_c + '°C';
+                condition = r.current.condition.text;
+                icon = r.current.condition.icon;
+                time = r.current.condition.last_updated;
+                document.getElementById('icon').src = 'https:' + icon;
+                document.getElementById('temp').innerHTML = temp;
+                document.getElementById('cond').innerHTML = condition;
+            });
+        </script>
+    </body>
+</html>

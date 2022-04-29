@@ -1,0 +1,26 @@
+<html>
+    <body>
+        <h1>What is going on?</h1>
+        <ul>
+            <li>One</li>
+            <li>Two</li>
+            <li>Three</li>
+            <li>
+                <div id="moreColours">You entered... &nbsp;</div>
+            </li>
+        </ul>
+        <button id="button" onclick="button();">See Colour!</button>
+        <script>
+            alert("Welcome to this page");
+            answer = prompt("Enter a colour please...");
+            console.log(answer);
+            colourAdded = false;
+            function button() {
+                if (!colourAdded) {
+                    document.getElementById('moreColours').innerHTML += answer;
+                }
+                colourAdded = true;
+            }
+        </script>
+    </body>
+</html>

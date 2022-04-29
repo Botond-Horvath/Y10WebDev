@@ -1,0 +1,67 @@
+.main {
+    background-color:aliceblue;
+}
+
+.valueItem
+{
+    background-color: rgb(0, 255, 115);
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 2px 2px 5px black;
+    margin: 10px;
+    transition:0.6s;
+}
+
+.valueItem:hover {
+    color:white;
+    background-color:brown;
+    cursor:pointer;
+}
+
+#itemWrapper
+{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0 auto;
+}
+
+h1
+{
+    text-align: center;
+    font-family:Verdana;
+    font-size:50px;
+    color:rgb(19, 218, 35);
+}
+
+#subHeading
+{
+    margin: 0 auto;
+    text-align: center;
+}
+
+#reset
+{
+    margin: 0 auto;
+    text-align: center;
+}
+
+#resetButton
+{
+    background-color: rgb(41, 103, 238);
+    width: 100px;
+    height: 50px;
+    border:green;
+    box-shadow: none;
+    margin: 10px;
+    transition:0.6s;
+}
+
+#resetButton:hover {
+    cursor:pointer;
+    background-color:blue;
+    color:white;
+}

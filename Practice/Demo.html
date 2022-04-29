@@ -1,0 +1,119 @@
+<html>
+    <head>
+        <title>Demonstration</title>
+        <style>
+            h1 {
+                font-family:Verdana;
+                font-weight:bold;
+                text-align:center;
+                margin:center;
+            }
+            #blue
+            {
+                display:none;
+            }
+            #purple
+            {
+                display:none;
+            }
+            #red
+            {
+                display:none;
+            }
+            #green
+            {
+                display:none;
+            }
+
+            ul
+            {
+                list-style: none;
+            }
+
+            .displayed {
+                text-align:center;
+                padding:30px;
+                margin-bottom:10px;
+                background-color:none;
+                font-family:Verdana;
+                border:2px black;
+                border-radius:20px:
+                transition:0.6s;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Demonstration Page</h1>
+        <p>Below is a list of colours to choose from:</p>
+        <ul>
+            <li>Red</li>
+            <li>Green</li>
+            <li>Blue</li>
+            <li>Purple</li>
+        </ul>
+        <!--Informatio about the colours-->
+        <div class="displayed" id="blue">
+            Colour of very hot stars!
+        </div>
+        <div class="displayed" id = "green">
+            Colour of nature!
+        </div>
+        <div class="displayed" id = "red">
+            Blood, suffering, and anger!
+        </div>
+        <div class="displayed" id="purple">
+            The colour of the disgraceful Újpest team!
+        </div>
+        <div id="inputWrapper">
+            Enter a colour you would like more information about: &nbsp;&nbsp;
+            <input type="text" id="inColor">
+            <!-- oninput= "revealInfo()"-->
+            <button id="clickMe" onclick="revealInfo()">Look Up</button>
+        </div>
+
+        <div id="radioButtonList">
+            <ul>
+                <li><input type="radio" id = "redChoice" class = "colourList" name="colours" value = "red" onclick="revealInfo2(this);"><label for = "redChoice">Red</label></li>
+                <li><input type="radio" id = "greenChoice" class = "colourList" name="colours" value = "green" onclick="revealInfo2(this);">Green</li>
+                <li><input type="radio" id = "blueChoice" class = "colourList" name="colours" value = "blue" onclick="revealInfo2(this);">Blue</li>
+                <li><input type="radio" id = "purpleChoice" class = "colourList" name="colours" value = "purple" onclick="revealInfo2(this);">Purple</li>
+            </ul>
+        </div>
+        <script>
+            function revealInfo()
+            {
+                answer = document.getElementById("inColor").value.toLowerCase();
+                radioList = document.getElementsByClassName("colourList");
+                let arr = []
+                for (i=0;i<radioList.length;i++) {
+                    arr.push(radioList[i].value)
+                }
+                if (arr.includes(answer) == true)
+                {
+                    for (i=0;i<radioList.length;i++)
+                    {
+                        document.getElementById(arr[i]).style.display = "none";
+                        document.getElementById(arr[i]).style.backgroundColor = "none";
+                    }
+                    document.getElementById(answer).style.display = "block";
+                    document.getElementById(answer).style.backgroundColor = answer;
+                }
+                else {
+                    alert("Please enter a valid colour in the list!")
+                }
+            }
+
+            function revealInfo2(chosenColour)
+            {
+                buttonList = document.getElementsByClassName("colourList");
+                for (i=0;i < buttonList.length;i++)
+                {
+                    document.getElementById(buttonList[i].value).style.display = "none";
+                    document.getElementById(buttonList[i].value).style.backgroundColor = "none";
+                }
+                document.getElementById(chosenColour.value).style.display = "block";
+                document.getElementById(chosenColour.value).style.backgroundColor = chosenColour.value;
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,175 @@
+<html>
+    <head>
+        <title>Fun! Fun! Fun!</title>
+        <!-- Load an icon library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            *
+            {
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+
+            body
+            {
+                background-image: radial-gradient(darkslateblue,white);
+            }
+
+            .navbar
+            {
+                width: 100%;
+                background-color:darkslateblue;
+                overflow: auto;
+            }
+
+            .navbar a
+            {
+                float: left;
+                text-align: center;
+                padding: 12px;
+                color: lightgrey;
+                text-decoration: none;
+                font-size: 17px;
+            }
+
+            .navbar a:hover
+            {
+                background-color: white;
+            }
+
+            a
+            {
+                display:block;
+            }
+
+            .continent
+            {
+                display:flex;
+                flex-direction:column;
+                padding:10px;
+                margin:20px;
+                width: 300px;
+                background-color: mediumslateblue;
+                color:black;
+                font-size: x-large;
+                text-align: center;
+                align-items: center;
+            }
+
+            .country
+            {
+                padding-left:10px;
+                padding-right:10px;
+                padding-top: 5px;
+                padding-bottom:5px;
+                margin-left:20px;
+                margin-right:20px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                background-color: lightblue;
+                width:50%;
+                line-height:2;
+                color:white;
+                font-size:large;
+                text-align: center;
+            }
+
+            #flexContainer
+            {
+                display:flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items:flex-start;
+            }
+
+            hr
+            {
+                width:100%;
+                border-top: 4px solid purple;
+                border-radius: 2px;
+            }
+
+            #bottom
+            {
+                width:100%;
+                background-color:lightsteelblue;
+            }
+
+            .title
+            {
+                font-style:italic;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="navbar">
+            <a href="#top"><i class="fa fa-fw fa-home"></i> Home</a>
+            <a href="data.html"><i class="fa fa-fw fa-database"></i> Data</a>
+            <a href="more.html"><i class="fa fa-fw fa-info-circle"></i> Learn More</a>
+            <a href="#bottom"><i class="fa fa-fw fa-question-circle-o"></i> Help</a>
+        </div>
+        <div id="top">
+            <h1>Nav Bar and FlexBox - Super Fun!</h1>
+        </div>
+        <div id="flexContainer">
+            <div class="continent">
+                <div class="title">North America</div>
+                <div class="country">
+                    Canada
+                </div>
+                <div class="country">
+                    United States of America
+                </div>
+            </div>
+            <div class="continent">
+                <div class="title">South America</div>
+                <div class="country">
+                    Argentina
+                </div>
+                <div class="country">
+                    Brazil
+                </div>
+                <div class="country">
+                    Chile
+                </div>
+                <div class="country">
+                    Columbia
+                </div>
+            </div>
+            <div class="continent">
+                <div class="title">Europe</div>
+                <div class="country">France</div>
+
+            </div>
+            <div class="continent">
+                <div class="title">Asia</div>
+            </div>
+            <div class="continent">
+                <div class="title">Africa</div>
+                <div class="country">
+                    Kenya
+                </div>
+                <div class="country">
+                    South Africa
+                </div>
+                <div class="country">
+                    Egypt
+                </div>
+            </div>
+        </div>
+        <div id="bottom">
+            <hr>
+            Don't forget you can always ask me for help.
+            You can also use the following links:
+            <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">Flex Box Reference</a>
+            <a href="https://www.w3schools.com/csS/css3_flexbox.asp">W3Schools</a>
+            <a href="https://fontawesome.com/v4.7.0/cheatsheet/">Font Awesome Icons</a>
+        </div>
+        <script type="text/javascript">
+
+        </script>
+    </body>
+</html>
