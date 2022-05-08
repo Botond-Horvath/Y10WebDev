@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Map</title>
+        <link rel="icon" href="Hungary.png"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            /*Importing fonts that I will use (especially on the map)*/
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Charm:wght@700&family=Montserrat:wght@500&family=Redressed&display=swap');
+            /*body styling (basic)*/
+            body {
+                background-color:aliceblue;
+                margin:0;
+                padding:0;
+                font-family:'Montserrat', sans-serif;
+            }
+
+            h1 {
+                background-image:url(naturebackground.jpg); /*background image behind header*/
+                margin:0;
+                padding-top:200px;
+                padding-bottom:200px;
+                background-size:1450px 600px; /*Sizing of the background image*/
+                font-size:50px;
+                text-align:center;
+            }
+
+            /*Styling for the navigation bar (unordered list):*/
+            ul.nav {
+                list-style-type: none; /*No bullet points*/
+                background-color:#78acf7;
+			    margin:0;
+			    width:100%; /*Spans the whole page*/
+			    padding:0;
+                overflow:hidden;
+            }
+            /*Different styling for the current page*/
+            .current {
+                background-color:#6a8667;
+                color:white;
+            }
+            /*All sections are floated to the right*/
+            ul.nav > li {
+                float:left;
+            }
+            ul.nav > li a {
+                text-align:center;
+			    color:black;
+			    padding:10px;
+			    font-size:20px;
+			    text-decoration:none;
+                border:none;
+                display:inline-block;
+            }
+            /*If the user hovers over one of the links:*/
+            ul.nav > li a:hover {
+                background-color:#6a8667;
+                color:black;
+                cursor:pointer;
+                transition:0.2s;
+            }
+
+            .text {
+                margin:30px;
+            }
+
+            /*Sticky property, also manipulated through JS to make the sticky navbar:*/
+            .sticky {
+                top:0;
+                position:sticky;
+            }
+        </style>
+        <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
+    </head>
+    <body>
+        <!--Header tag for the title of this sub-umbrella section on Historical Sites-->
+        <h1>The Parks and Trails of Hungary</h1>
+
+        <!--HTML unordered list for the navigation bar at the top-->
+        <ul class="nav" id="navId">
+            <li><a href="index.html">Welcome</a></li>
+            <li><a href="map.html">Historical sites</a></li>
+            <li><a class="current" href="nature.html">Nature</a></li>
+            <li><a href="city.html">Cities</a></li>
+        </ul>
+
+        <!--Div container for all the normal text that will be on the site-->
+        <div class="text">
+            <p>
+                Nature section. Would include a similar map to the one in the
+                historical sites section, but with markers for national parks and
+                hiking opportunities.
+            </p>
+        </div>
+        <script>
+            nav = document.getElementById("navId");
+            sticky = nav.offsetTop;
+
+            function glue() {
+                if (window.pageYOffset > sticky) {
+                    nav.classList.add("sticky");
+                } else {
+                    nav.classList.remove("sticky");
+                }
+            }
+        </script>
+    </body>
+</html>

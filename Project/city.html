@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Veszprem</title>
+        <link rel="icon" href="Hungary.png"/>
+        <style>
+            /*Importing fonts*/
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+            /*body styling (basic)*/
+            body {
+                background-color:aliceblue;
+                margin:0;
+                padding:0;
+                font-family:'Montserrat', sans-serif;
+            }
+
+            h1 {
+                background-image:url(citybackground.jpg); /*background image behind header*/
+                margin:0;
+                padding-top:150px;
+                padding-bottom:150px;
+                background-size:1450px 600px; /*Sizing of the background image*/
+                font-size:100px;
+                text-align:center;
+                color:white;
+            }
+
+            /*Styling for the navigation bar (unordered list):*/
+            ul.nav {
+                list-style-type: none; /*No bullet points*/
+                background-color:#C4C4C4;
+			    margin:0;
+			    width:100%; /*Spans the whole page*/
+			    padding:0;
+                overflow:hidden;
+            }
+            /*Different styling for the current page*/
+            .current {
+                background-color:#8B4F23;
+                color:white;
+            }
+            /*All sections are floated to the right*/
+            ul.nav > li {
+                float:left;
+            }
+            ul.nav > li a {
+                text-align:center;
+			    color:black;
+			    padding:10px;
+			    font-size:20px;
+			    text-decoration:none;
+                border:none;
+                display:inline-block;
+            }
+            /*If the user hovers over one of the links:*/
+            ul.nav > li a:hover {
+                background-color:#8B4F23;
+                color:black;
+                cursor:pointer;
+                transition:0.2s;
+            }
+
+            /*Basic margins set for anything under a text class:*/
+            .text {
+                margin:30px;
+            }
+
+            .header {
+                position:relative;
+            }
+
+            .weather {
+                position:absolute;
+                bottom:0;
+                right:0;
+                padding:15px;
+                color:white;
+            }
+
+            #temp {
+                font-weight:bold;
+                text-align:center;
+            }
+
+            .forecast {
+                text-decoration:underline;
+                color:white;
+                transition:0.5s;
+                font-style:italic;
+
+            }
+
+            .forecast:hover {
+                color:yellow;
+                cursor:pointer;
+            }
+
+            .sticky {
+                top:0;
+                position:sticky;
+            }
+
+            p {
+                margin:30px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Veszpr&#233;m</h1>
+            <div class="weather">
+                <img src="" id="icon"/>
+                <div id="temp"></div>
+                <div id="cond"></div>
+                <a class="forecast" href="weather.html">Forecast -></a>
+            </div>
+        </div>
+
+        <!--HTML unordered list for the navigation bar at the top-->
+        <ul class="nav" id="navId">
+            <li><a href="index.html">Welcome</a></li>
+            <li><a href="map.html">Historical sites</a></li>
+            <li><a href="nature.html">Nature</a></li>
+            <li><a class="current" href="city.html">Cities</a></li>
+        </ul>
+
+        <p>Text goes here...</p>
+
+        <script src="coords.js"></script>
+        <script>
+            lat = d.veszprem.lat;
+            long = d.veszprem.long;
+            lang = 'en';
+            key = 'a5d0c623c2fb4eb7a9e133556221404';
+            url = `https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${lat},${long}&days=5&lang=${lang}&alerts=yes`;
+
+            function getData() {
+                return fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error (response.statusText);
+                        alert('Weather data is unavailable at the moment for ' + location);
+                    }
+                    data = response.json();
+                    return data;
+                })
+                .catch(err => console.log('Request Failed', err));
+            }
+            getData().then(r => {
+                console.log(r);
+                temp = r.current.temp_c + '°C';
+                condition = r.current.condition.text;
+                icon = r.current.condition.icon;
+                time = r.current.condition.last_updated;
+                document.getElementById('icon').src = 'https:' + icon;
+                document.getElementById('temp').innerHTML = temp;
+                document.getElementById('cond').innerHTML = condition;
+            });
+
+            window.onscroll = function() {glue()};
+            nav = document.getElementById("navId");
+            sticky = nav.offsetTop;
+            function glue() {
+                if (window.pageYOffset > sticky) {
+                    nav.classList.add("sticky");
+                } else {
+                    nav.classList.remove("sticky");
+                }
+            }
+        </script>
+    </body>
+</html>

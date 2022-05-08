@@ -1,50 +1,333 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>Veszprem</title>
+        <title>Welcome</title>
+        <link rel="icon" href="Hungary.png"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
+            /*Importing fonts*/
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+            /*body styling (basic)*/
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                background-color:aliceblue;
+                margin:0;
+                padding:0;
+                font-family:'Montserrat', sans-serif;
+            }
+
             h1 {
-            font-family:Verdana;
-            text-align:center;
+                background-image:url(indexbackground.jpg); /*background image behind header*/
+                margin:0;
+                padding-top:200px;
+                padding-bottom:200px;
+                background-size:1450px 700px; /*Sizing of the background image*/
+                font-size:50px;
+                text-align:center;
+            }
+
+            /*Styling for the navigation bar (unordered list):*/
+            ul.nav {
+                list-style-type: none; /*No bullet points*/
+                background-color:#78acf7;
+			    margin:0;
+			    width:100%; /*Spans the whole page*/
+			    padding:0;
+                overflow:hidden;
+                z-index:3;
+            }
+            /*Different styling for the current page*/
+            .current {
+                background-color:#6a8667;
+                color:white;
+            }
+            /*All sections are floated to the right*/
+            ul.nav > li {
+                float:left;
+            }
+            ul.nav > li a {
+                text-align:center;
+			    color:black;
+			    padding:10px;
+			    font-size:20px;
+			    text-decoration:none;
+                border:none;
+                display:inline-block;
+            }
+            /*If the user hovers over one of the links:*/
+            ul.nav > li a:hover {
+                background-color:#6a8667;
+                color:black;
+                cursor:pointer;
+                transition:0.2s;
+            }
+
+            /*Basic margins set for anything under a text class:*/
+            .text {
+                margin:30px;
+            }
+
+            .flex {
+                display:flex;
+                flex-flow:row wrap;
+                justify-content:center;
+            }
+
+            .flex > div {
+                padding:15px;
+                text-align:center;
+                width:50%;
+            }
+
+            #carousel1 {order:1}
+            .text1 {order:2}
+            .text2 {order:3}
+            #carousel2 {order:4}
+            #carousel3 {order:5}
+            .text3 {order:6}
+
+            .maplink {
+                transition:0.2s;
+            }
+            .maplink:hover {
+                box-shadow:5px 2px 2px black;
+                cursor:pointer;
+            }
+
+            /*Sticky property, also manipulated through JS to make the sticky navbar:*/
+            .sticky {
+                top:0;
+                position:sticky;
+            }
+
+            @media only screen and (max-width: 1250px) {
+                #carousel1 {order:2}
+                .text1 {order:1}
+                .text2 {order:3}
+                #carousel2 {order:4}
+                .text3 {order:5}
+                #carousel3 {order:6}
+                .flex > div {
+                    width:100%;
+                }
             }
         </style>
     </head>
     <body>
-        <h1>This is the weather in Veszprem</h1>
-        <img src="" id="icon"/>
-        <div id="temp"></div>
-        <div id="cond"></div>
+        <!--Header tag for the title of this sub-umbrella section on Historical Sites-->
+        <h1>Hungary History and Geography</h1>
 
-        <script src="coords.js"></script>
-        <script>
-            lat = d.veszprem.lat;
-            long = d.veszprem.long;
-            lang = 'en';
-            key = 'a5d0c623c2fb4eb7a9e133556221404';
-            url = `https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${lat},${long}&days=3&lang=${lang}&alerts=yes`;
+        <!--HTML unordered list for the navigation bar at the top-->
+        <ul class="nav" id="navId">
+            <li><a class='current' href="#top">Welcome</a></li>
+            <li><a href="map.html">Historical sites</a></li>
+            <li><a href="nature.html">Nature</a></li>
+            <li><a href="city.html">Cities</a></li>
+        </ul>
 
-            function getData() {
-                return fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error (response.statusText);
-                        alert('Weather data is unavailable at the moment for ' + location);
-                    }
-                    data = response.json();
-                    return data;
-                })
-                .catch(err => console.log('Request Failed', err));
+        <div class="text">
+            <p>
+                Welcome to this website on the historical sites, natural sites, and
+                cities that can be found in Hungary. If you are a tourist hoping to
+                visit Hungary, or are a Hungarian hoping to go back, I hope that this
+                website is able to uncover in an interactive way some of the treasures
+                of this country, while teaching you something new!
+            </p>
+        </div>
+        <div class="flex">
+            <div id="carousel1" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carousel1" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#carousel1" data-bs-slide-to="1"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <p><b>Historical Overview</b></p>
+                        <a href="nature.html"><img src="over1.jpg" alt="Image 1" class="d-block" width="100%"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <p><b>Geographical Overview</b></p>
+                        <a href="nature.html"><img src="over2.jpg" alt="Image 2" class="d-block" width="100%"></a>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel1" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+            <div class="text1">
+                <h2>Deep Overview</h2>
+                <p>
+                    The sections on the left are constructed to provide a deep
+                    overview of Hungary's geographical reality and position, as well
+                    as its historical past. The sections will introduce you to a
+                    basic knowledge base that will make studying the national parks
+                    and historical sites that more interesting. It is a great place
+                    to start to get familiar with Hungary! The historical page
+                    is split up by time period or era, and the geographical page is
+                    split by geographical region. This way you can find information
+                    on the era or region that most interests you.
+                </p>
+            </div>
+            <div class="text2">
+                <h2>Historical Sites</h2>
+                <p>
+                    Check out some of Hungary's medieval castles and churches that
+                    have been preserved to this day, and uncover their fascinating
+                    stories. You may also visit the map below to get a sense of where
+                    these sites are located across the country! The map will also
+                    link you to some pages with more in depth information of these
+                    sites!
+                </p>
+                <a href="map.html"><img class="maplink" src="maplink.jpg" width="200" height="120"/></a>
+            </div>
+            <div id="carousel2" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carousel2" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#carousel2" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#carousel2" data-bs-slide-to="2"></button>
+                    <button type="button" data-bs-target="#carousel2" data-bs-slide-to="3"></button>
+                    <button type="button" data-bs-target="#carousel2" data-bs-slide-to="4"></button>
+                    <button type="button" data-bs-target="#carousel2" data-bs-slide-to="5"></button>
+                    <button type="button" data-bs-target="#carousel2" data-bs-slide-to="6"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <p><b>Castle of Boldogk&#337;</b></p>
+                        <a href="https://visithungary.com/articles/boldogko-castle-the-hidden-treasure-of-zemplen-mountains" target="_blank"><img src="boldogko.jpg" alt="Image 1" class="d-block" width="100%"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <p><b>Castle of Csesznek</b></p>
+                        <a href="https://en.wikipedia.org/wiki/Castle_of_Csesznek" target="_blank"><img src="csesznek.jpg" alt="Image 2" class="d-block" width="100%"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <p><b>Castle of F&#252;z&#233;r</b></p>
+                        <a href="https://visithungary.com/articles/fuzer-castle-the-middle-ages-reloaded" target="_blank"><img src="fuzer.jpg" alt="Image 3" class="d-block" width="100%"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <p><b>Castle of Gyula</b></p>
+                        <a href="https://en.wikipedia.org/wiki/Gyula,_Hungary" target="_blank"><img src="gyula.jpg" alt="Image 3" class="d-block" width="100%"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <p><b>P&#233;cs Cathedral</b></p>
+                        <a href="https://en.wikipedia.org/wiki/P%C3%A9cs_Cathedral" target="_blank"><img src="pecscath.jpg" alt="Image 3" class="d-block" width="100%"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <p><b>P&#233;cs Mosque-Church</b></p>
+                        <a href="https://en.wikipedia.org/wiki/Mosque_of_Pasha_Qasim" target="_blank"><img src="pecsmecs.jpg" alt="Image 3" class="d-block" width="100%"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <p><b>Sikl&#211;s Castle</b></p>
+                        <a href="https://en.wikipedia.org/wiki/Castle_of_Sikl%C3%B3s" target="_blank"><img src="siklos.jpg" alt="Image 3" class="d-block" width="100%"></a>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel2" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel2" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+            <div id="carousel3" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carousel3" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#carousel3" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#carousel3" data-bs-slide-to="2"></button>
+                    <button type="button" data-bs-target="#carousel3" data-bs-slide-to="3"></button>
+                    <button type="button" data-bs-target="#carousel3" data-bs-slide-to="4"></button>
+                    <button type="button" data-bs-target="#carousel3" data-bs-slide-to="5"></button>
+                    <button type="button" data-bs-target="#carousel3" data-bs-slide-to="6"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <p><b>Fert&#337;-Hans&#225;g NP</b></p>
+                        <a href="https://en.wikipedia.org/wiki/Fert%C5%91-Hans%C3%A1g_National_Park" target="_blank"><img src="ferto.jpg" alt="Image 1" class="d-block" width="100%"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <p><b>&#336;rs&#233;g NP</b></p>
+                        <a href="https://en.wikipedia.org/wiki/%C5%90rs%C3%A9g_National_Park" target="_blank"><img src="orseg.jpg" alt="Image 2" class="d-block" width="100%"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <p><b>Balaton Uplands NP</b></p>
+                        <a href="https://en.wikipedia.org/wiki/Balaton_Uplands_National_Park" target="_blank"><img src="balaton.jpg" alt="Image 2" class="d-block" width="100%"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <p><b>Danube-Drava NP</b></p>
+                        <a href="https://en.wikipedia.org/wiki/Danube-Drava_National_Park" target="_blank"><img src="dunadrava.jpg" alt="Image 2" class="d-block" width="100%"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <p><b>Danube-Ipoly NP</b></p>
+                        <a href="https://en.wikipedia.org/wiki/Danube-Ipoly_National_Park" target="_blank"><img src="dunaipoly.jpg" alt="Image 2" class="d-block" width="100%"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <p><b>Kiskuns&#225;g NP</b></p>
+                        <a href="https://en.wikipedia.org/wiki/Kiskuns%C3%A1g_National_Park" target="_blank"><img src="kiskunsag.jpg" alt="Image 2" class="d-block" width="100%"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <p><b>B&#252;kk NP</b></p>
+                        <a href="https://en.wikipedia.org/wiki/B%C3%BCkk_National_Park" target="_blank"><img src="bukk.jpg" alt="Image 2" class="d-block" width="100%"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <p><b>Aggtelek NP</b></p>
+                        <a href="https://en.wikipedia.org/wiki/Aggtelek_National_Park" target="_blank"><img src="aggtelek.jpg" alt="Image 2" class="d-block" width="100%"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <p><b>Hortob&#225;gy NP</b></p>
+                        <a href="https://en.wikipedia.org/wiki/Hortob%C3%A1gy_National_Park" target="_blank"><img src="hortobagy.jpg" alt="Image 2" class="d-block" width="100%"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <p><b>K&#246;r&#246;s-Maros NP</b></p>
+                        <a href="https://en.wikipedia.org/wiki/K%C3%B6r%C3%B6s-Maros_National_Park" target="_blank"><img src="korosmaros.jpg" alt="Image 2" class="d-block" width="100%"></a>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel3" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel3" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+            <div class="text3">
+                <h2>Hiking and Parks (National Parks)</h2>
+                <p>
+                    Check out Hungary's 10 national parks! The parks contain some of
+                    Hungary's most iconic spots from every part of the country. These
+                    include parks from the Transdanubian mountains / plains, the
+                    Alpine foothills, the Northern mountains, and the Great Hungarian
+                    Plain. They show the variety of biomes and regions within the
+                    small country of Hungary, and reflect on its true central
+                    European feel. It contains a bit of the west, south, and east as
+                    well! Check out the map below to see all the majour hiking
+                    opportunities in a graphical way.
+                </p>
+                <a href="nature.html"><img class="maplink" src="maplink.jpg" width="200" height="120"/></a>
+            </div>
+        </div>
+
+        </script>
+        <!--Separate code for the sticky navigation bar manipulation:-->
+        <script type="text/javascript">
+            window.onscroll = function() {glue()};
+
+            nav = document.getElementById("navId");
+            sticky = nav.offsetTop;
+
+            function glue() {
+                if (window.pageYOffset > sticky) {
+                    nav.classList.add("sticky");
+                } else {
+                    nav.classList.remove("sticky");
+                }
             }
-            getData().then(r => {
-                console.log(r);
-                temp = r.current.temp_c + '°C';
-                condition = r.current.condition.text;
-                icon = r.current.condition.icon;
-                time = r.current.condition.last_updated;
-                document.getElementById('icon').src = 'https:' + icon;
-                document.getElementById('temp').innerHTML = temp;
-                document.getElementById('cond').innerHTML = condition;
-            });
         </script>
     </body>
 </html>

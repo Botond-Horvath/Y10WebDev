@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Test</title>
+        <title>Map</title>
         <link rel="icon" href="Hungary.png"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
@@ -17,11 +17,11 @@
             }
 
             h1 {
-                background-image:url(background.jpg); /*background image behind header*/
+                background-image:url(historybackground.jpg); /*background image behind header*/
                 margin:0;
-                padding-top:150px;
-                padding-bottom:150px;
-                background-size:1450px 400px; /*Sizing of the background image*/
+                padding-top:200px;
+                padding-bottom:200px;
+                background-size:1450px 600px; /*Sizing of the background image*/
                 font-size:50px;
                 text-align:center;
             }
@@ -69,7 +69,7 @@
             /*Styling for the map size:*/
             #map {
                 width:100%;
-                height:730px;
+                height:715px;
             }
             /*Styling for the marker headings inside map (class given in JS):*/
             .heading {
@@ -92,10 +92,10 @@
 
         <!--HTML unordered list for the navigation bar at the top-->
         <ul class="nav" id="navId">
-            <li><a href="#top">Welcome</a></li>
-            <li><a class='current' href="#top">Historical sites</a></li>
-            <li><a class="dropdown_button" href="#top">Nature</a></li>
-            <li><a href="#top">Cities</a></li>
+            <li><a href="index.html">Welcome</a></li>
+            <li><a class='current' href="map.html">Historical sites</a></li>
+            <li><a class="dropdown_button" href="nature.html">Nature</a></li>
+            <li><a href="city.html">Cities</a></li>
         </ul>
 
         <!--Div container for all the normal text that will be on the site-->
@@ -108,6 +108,8 @@
                 are in fact some renaissance and baroque sites too. The sites included
                 here comprise of castles, churches, chapels, and palaces. Feel free
                 to explore, and use the plus/minus bar to zoom and shrink the map!
+                Check <a href="hist.html">this</a> link for a general overview of
+                Hungary's history.
             </p>
         </div>
 

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.column1, .column2 {
+  float: left;
+  width: 50%;
+  padding: 30px;
+  text-align:center;
+}
+
+.row1:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.row2 > .column1 {order:1}
+.row2 > .column2 {order:2}
+
+@media screen and (max-width:1250px) {
+    .column1, .column2 {
+        width: 100%;
+    }
+    .row2 > .column1 {order:2}
+    .row2 > .column2 {order:1}
+    img {
+        width:100%;
+        height:100%;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="row1">
+    <div class="column1">
+        <img id="slide1" src="" width="600" height="400"/>
+    </div>
+    <div class="column2">
+        <h2>Deep Overview</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
+    </div>
+</div>
+<div class="row2">
+    <div class="column1">
+        <h2>Medieval Castles and Churches</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
+    </div>
+    <div class="column2">
+        <img id="slide2" src="" width="600" height="400"/>
+    </div>
+</div>
+<script type="text/javascript">
+    num = 0;
+    const slides1 = ['1.jpg','2.jpg','3.jpg'];
+    const slides2 = ['indexbackground.jpg','historybackground.jpg','castlebackground.jpg'];
+    image1 = document.getElementById('slide1');
+    image2 = document.getElementById('slide2');
+    image1.src = slides1[num];
+    image2.src = slides2[num];
+    for (i=0;i<3;i++) {
+        setInterval(changeSlide,3000);
+        function changeSlide() {
+            image1.src = slides1[i];
+            image2.src = slides2[i];
+        };
+        if (i=2) {i=0};
+    };
+</script>
+</body>
+</html>
+
+

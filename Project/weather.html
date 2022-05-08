@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="sun.png"/>
+        <title>Weather</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                background-color:aliceblue;
+                margin:0;
+                padding:0;
+                font-family:'Montserrat', sans-serif;
+            }
+
+            h1 {
+                margin:10px;
+                text-align:center;
+                font-size:50px;
+                font-weight:bold;
+            }
+
+            .flex {
+                display:flex;
+                flex-direction:row;
+                justify-content:center;
+                width:100%;
+            }
+
+            .flex > div {
+                padding:15px;
+                border:1px solid black;
+            }
+
+            #date1, #date2, #date3 {
+                font-weight:bold;
+            }
+
+            a {
+                display:block;
+                text-align:center;
+                margin-top:15px;
+                text-decoration:none;
+                color:blue;
+                font-weight:bold;
+                font-size:25px;
+                transition:0.2s;
+            }
+
+            a:hover {
+                color:orange;
+                text-decoration:underline;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Veszpr&#233;m 3-day weather forecast</h1>
+        <div class="flex">
+            <div class="day1">
+                <div id="date1"></div>
+                <img src="" id="icon1"/>
+                <div id="cond1"></div>
+                <div id="temp_max1"></div>
+                <div id="temp_min1"></div>
+            </div>
+            <div class="day2">
+                <div id="date2"></div>
+                <img src="" id="icon2"/>
+                <div id="cond2"></div>
+                <div id="temp_max2"></div>
+                <div id="temp_min2"></div>
+            </div>
+            <div class="day3">
+                <div id="date3"></div>
+                <img src="" id="icon3"/>
+                <div id="cond3"></div>
+                <div id="temp_max3"></div>
+                <div id="temp_min3"></div>
+            </div>
+        </div>
+        <a href="city.html">Back to page...</a>
+        <script src="coords.js"></script>
+        <script>
+            lat = d.veszprem.lat;
+            long = d.veszprem.long;
+            lang = 'en';
+            key = 'a5d0c623c2fb4eb7a9e133556221404';
+            url = `https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${lat},${long}&days=5&lang=${lang}&alerts=yes`;
+
+            function getData() {
+                return fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error (response.statusText);
+                        alert('Weather data is unavailable at the moment for ' + location);
+                    }
+                    data = response.json();
+                    return data;
+                })
+                .catch(err => console.log('Request Failed', err));
+            }
+            getData().then(r => {
+                console.log(r);
+                document.getElementById('date1').innerHTML = r.forecast.forecastday[0].date;
+                document.getElementById('date2').innerHTML = r.forecast.forecastday[1].date;
+                document.getElementById('date3').innerHTML = r.forecast.forecastday[2].date;
+                document.getElementById('icon1').src = 'https:' + r.forecast.forecastday[0].day.condition.icon;
+                document.getElementById('icon2').src = 'https:' + r.forecast.forecastday[1].day.condition.icon;
+                document.getElementById('icon3').src = 'https:' + r.forecast.forecastday[2].day.condition.icon;
+                document.getElementById('cond1').innerHTML = r.forecast.forecastday[0].day.condition.text;
+                document.getElementById('cond2').innerHTML = r.forecast.forecastday[1].day.condition.text;
+                document.getElementById('cond3').innerHTML = r.forecast.forecastday[2].day.condition.text;
+                document.getElementById('temp_max1').innerHTML = 'Max: ' + r.forecast.forecastday[0].day.maxtemp_c + '°C';
+                document.getElementById('temp_max2').innerHTML = 'Max: ' + r.forecast.forecastday[1].day.maxtemp_c + '°C';
+                document.getElementById('temp_max3').innerHTML = 'Max: ' + r.forecast.forecastday[2].day.maxtemp_c + '°C';
+                document.getElementById('temp_min1').innerHTML = 'Min: ' + r.forecast.forecastday[0].day.mintemp_c + '°C';
+                document.getElementById('temp_min2').innerHTML = 'Min: ' + r.forecast.forecastday[1].day.mintemp_c + '°C';
+                document.getElementById('temp_min3').innerHTML = 'Min: ' + r.forecast.forecastday[2].day.mintemp_c + '°C';
+            });
+        </script>
+    </body>
+</html>
