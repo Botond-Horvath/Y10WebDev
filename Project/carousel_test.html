@@ -12,7 +12,7 @@ body {
 
 .column1, .column2 {
   float: left;
-  width: 50%;
+  width: 50%; /*Manually adjusting the width*/
   padding: 30px;
   text-align:center;
 }
@@ -26,6 +26,7 @@ body {
 .row2 > .column1 {order:1}
 .row2 > .column2 {order:2}
 
+/*Media tag for responsivity*/
 @media screen and (max-width:1250px) {
     .column1, .column2 {
         width: 100%;
@@ -41,34 +42,45 @@ body {
 </head>
 <body>
 
+<!--Creating the row-column layout in order to replace the flexbox-->
+<!--Flexbox does not work with this approach for various reasons-->
 <div class="row1">
     <div class="column1">
         <img id="slide1" src="" width="600" height="400"/>
     </div>
     <div class="column2">
         <h2>Deep Overview</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis
+            velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat,
+            purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
     </div>
 </div>
 <div class="row2">
     <div class="column1">
         <h2>Medieval Castles and Churches</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis
+            velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat,
+            purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
     </div>
     <div class="column2">
         <img id="slide2" src="" width="600" height="400"/>
     </div>
 </div>
+<!--Javascript code:-->
 <script type="text/javascript">
-    num = 0;
+    num = 0; //setting counter
+    //Arrays of images:
     const slides1 = ['1.jpg','2.jpg','3.jpg'];
     const slides2 = ['indexbackground.jpg','historybackground.jpg','castlebackground.jpg'];
+    //Defining the first and second image locations:
     image1 = document.getElementById('slide1');
     image2 = document.getElementById('slide2');
+    //Setting defaults slides:
     image1.src = slides1[num];
     image2.src = slides2[num];
+    //Loop to rotate through the 3 images
     for (i=0;i<3;i++) {
-        setInterval(changeSlide,3000);
+        setInterval(changeSlide,3000); //Rotate every 3s
         function changeSlide() {
             image1.src = slides1[i];
             image2.src = slides2[i];

@@ -1,3 +1,4 @@
+//Dictionary of the coordinates of all needed cities
 const d = {
     veszprem: {lat:47.096143,long:17.904480},
     budapest: {lat:47.497999,long:19.040082},

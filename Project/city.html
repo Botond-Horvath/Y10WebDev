@@ -107,12 +107,14 @@
         </style>
     </head>
     <body>
+        <!--Live weather feature:-->
         <div class="header">
             <h1>Veszpr&#233;m</h1>
             <div class="weather">
-                <img src="" id="icon"/>
-                <div id="temp"></div>
-                <div id="cond"></div>
+                <img src="" id="icon"/> <!--Weather icon-->
+                <div id="temp"></div> <!--Temperature-->
+                <div id="cond"></div> <!--Condition (description)-->
+                <!--Link to the forecast page:-->
                 <a class="forecast" href="weather.html">Forecast -></a>
             </div>
         </div>
@@ -129,12 +131,15 @@
 
         <script src="coords.js"></script>
         <script>
+            //Defining all the values needed in the API link (coords,language,and key)
             lat = d.veszprem.lat;
             long = d.veszprem.long;
             lang = 'en';
             key = 'a5d0c623c2fb4eb7a9e133556221404';
-            url = `https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${lat},${long}&days=5&lang=${lang}&alerts=yes`;
+            //Insert these variables into the key, along with the 3-day forecast I want, and the alerts included
+            url = `https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${lat},${long}&days=3&lang=${lang}&alerts=yes`;
 
+            //Function for fetching the data for the location. Promises in case of error
             function getData() {
                 return fetch(url)
                 .then(response => {
@@ -147,12 +152,14 @@
                 })
                 .catch(err => console.log('Request Failed', err));
             }
+            //Function defining what to do if the data was fetched
             getData().then(r => {
                 console.log(r);
                 temp = r.current.temp_c + '°C';
                 condition = r.current.condition.text;
                 icon = r.current.condition.icon;
                 time = r.current.condition.last_updated;
+                //Changing the HTML elements to the appropriate values
                 document.getElementById('icon').src = 'https:' + icon;
                 document.getElementById('temp').innerHTML = temp;
                 document.getElementById('cond').innerHTML = condition;

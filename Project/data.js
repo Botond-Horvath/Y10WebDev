@@ -1,3 +1,4 @@
+//Data imported into the map API with all the locations
 const data = [
     velemer = {
         coords: [46.732679, 16.372416],
